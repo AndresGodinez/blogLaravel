@@ -75,7 +75,8 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts.fragments.info')
+        @include('layouts.fragments.errors')
         @yield('content')
     </div>
 
