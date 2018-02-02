@@ -45,8 +45,8 @@ class TagController extends Controller
     public function store(TagStoreRequest $request)
     {
         $tag = Tag::create($request->all());
-        return redirect()->route('admin.tags.edit', $tag->id)
-                    ->with('info', 'Etiqueta Creada');
+        return redirect()->route('tags.edit', $tag->id)
+            ->with('info', 'Etiqueta creada con éxito');
     }
 
     /**
@@ -69,7 +69,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id)->first();
+        $tag = Tag::find($id);
         return view('admin.tags.edit', compact('tag'));
     }
 
