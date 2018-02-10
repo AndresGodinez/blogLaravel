@@ -7,6 +7,8 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Post;
 use App\Category;
 use App\Tag;
@@ -51,8 +53,16 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {
         $post = Post::create($request->all());
-        return redirect()->route('posts.edit', $post->id)
-            ->with('info', 'Entrada creada con éxito');
+        // $this->authorize('pass', $post);
+        //IMAGE 
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image',  $request->file('image'));
+            $post->fill(['file' => asset($path)])->save();
+        }
+        //TAGS
+        $post->tags()->attach($request->get('tags'));
+        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada creada con éxito');
+
     }
 
     /**
@@ -92,6 +102,13 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->fill($request->all())->save();
+       //IMAGE 
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image',  $request->file('image'));
+            $post->fill(['file' => asset($path)])->save();
+        }
+        //TAGS
+        $post->tags()->sync($request->get('tags'));
         return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada actualizada con éxito');
 
     }

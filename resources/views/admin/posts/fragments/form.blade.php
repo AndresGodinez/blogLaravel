@@ -13,8 +13,8 @@
 	{{ Form::text('slug', null, ['class'=>'form-control', 'id'=>'slug']) }}
 </div>
 <div class="form-group">
-	{{ Form::label('file', 'Imagen') }}
-	{{ Form::file('file') }}
+    {{ Form::label('image', 'Imagen') }}
+    {{ Form::file('image') }}
 </div>
 <div class="form-group">
 	{{ Form::label('status', 'Estado')}}
@@ -22,7 +22,7 @@
 		{{ Form::radio('status', 'PUBLISHED')}} Publicado
 	</label>
 	<label>
-		{{ Form::radio('status', 'DRAF')}} Borrador
+		{{ Form::radio('status', 'DRAFT')}} Borrador
 	</label>	
 </div>
 <div class="form-group">
@@ -36,11 +36,6 @@
 <div class="form-group">
 	{{ Form::label('excerpt', 'Extracto')}}
 	{{ Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => '3'])}}
-</div>
-
-<div class="form-group">
-	{{ Form::label('tags', 'Etiquetas') }}
-
 </div>
 
 <div class="form-group">
