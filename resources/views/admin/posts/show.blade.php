@@ -27,7 +27,7 @@
 								<td>{{ $post->created_at }}</td>
 								<td>{{ $post->updated_at }}</td>
 								<td>
-									<a href="{{ route('categories.edit', $post->id) }}" class="btn btn-warning">
+									<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">
 										Editar
 									</a>
 								</td>
